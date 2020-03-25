@@ -72,22 +72,28 @@ RUN rm /var/www/html/index.nginx-debian.html \
     && cp -r templates/ /var/www/html/ \
     && cp -r external/Mizar/api_doc /var/www/html/
 
-# 23 Export configuration file
+
+# 23 Fix css tag in index.html
+RUN sed -ri '/<\/head>/i \  <link rel=\"stylesheet\" href=\"..\/templates\/datacube\/styles.datacube.bundle.css\" type=\"text\/css\">' /var/www/html/index.html
+   
+
+
+# 24 Export configuration file
 RUN mkdir -p /opt/mizar/conf \
     && mv /var/www/html/conf/* /opt/mizar/conf/ \
     && rm -rf /var/www/html/conf \
     && ln -s /opt/mizar/conf /var/www/html/
 
-# 24 Set up the Nginx Mapserver configuration.
+# 25 Set up the Nginx Mapserver configuration.
 RUN rm -rf /etc/nginx/conf.d/* \
     && cp ../nginx.conf /etc/nginx/nginx.conf \
     && cp ../mizar.nginx.conf /etc/nginx/conf.d/default.conf
 
 
-# 25 Expose the Http server on 80
+# 26 Expose the Http server on 80
 EXPOSE 80
 
-# 26 Mount conf files
+# 27 Mount conf files
 VOLUME ["/opt/mizar/conf"]
 
 
