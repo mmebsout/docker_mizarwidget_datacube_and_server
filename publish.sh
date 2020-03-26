@@ -1,8 +1,8 @@
-read -s -p "Enter DockerHub idocias password: " idociaspassword
+ead -s -p "Enter DockerHub idocdocker password: " idocdockerpassword
 
-echo $idociaspassword  | docker login --username=idocias --password-stdin
-docker push idocias/datacube-and-server:latest
+echo $idocdockerpassword  | docker login --username=idocdocker --password-stdin
+docker push idocias/mizarwidget-datacube-and-server:latest
 
 source publishReadme.sh
 
-echo "idocias/datacube-and-server:latest published!"
+echo "idocias/mizarwidget-datacube-and-server:latest published!"
