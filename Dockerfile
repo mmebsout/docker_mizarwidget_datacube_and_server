@@ -129,6 +129,8 @@ EXPOSE 8081
 #----------------------------------------------------------------------------- CLEANUP
 #--------------------------------------------------------------------------------------------
 
+RUN cp /tmp/script.sh /
+
 # Remove the build dependencies.
 RUN apt-get remove -y python-pip 
 # Clean up APT when done.
@@ -137,8 +139,5 @@ RUN apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # ------- RUN APPs
-
-# COPY ./script.sh /
-# RUN chmod +x /script.sh
-# ENTRYPOINT ["/script.sh"]
-ENTRYPOINT ["nginx"]
+RUN chmod +x /script.sh
+ENTRYPOINT ["/script.sh"]

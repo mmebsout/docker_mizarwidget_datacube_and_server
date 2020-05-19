@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker rm mizarwidget-datacube_and_server -f
+docker rm mizarwidget-datacube-and-server -f
