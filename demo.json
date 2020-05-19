@@ -1,36 +1,44 @@
 {
-    "features": [
-       {
-          "geometry": {
-             "coordinates": [[
- [85.93599,-68.83499],
- [83.02315,-68.8411],
- [82.94728,-69.88261],
- [86.00521,-69.88369],
- [85.93599,-68.83499]
-      ]],
-             "type": "Polygon" 
-          },
-          "properties": {       
-    "identifier":"30doradus",    
-             "object": "30 doradus",                         
-             "title": "30doradus",
-    "quicklook": "https://upload.wikimedia.org/wikipedia/commons/c/c3/NGC_4414_%28NASA-med%29.jpg",
-    "def":"The Tarantula Nebula (also known as 30 Doradus) is an H II region in the Large Magellanic Cloud (LMC), from the solar system's perspective forming its south-east corner. ",
-    "services": {
- "datacube" : {
-   "appDataCube":true,
-   "appSpectre": true,
-   "appHistogramm": true,
-           "apiRest":"http://localhost:8081/",
-   "appFile":"1342228703_M17-2_SPIRE-FTS_15.0.3244_HR_SLW_gridding_cube.fits" 
- }
-     }
-          },
-          "type": "Feature" 
-       }
-    ],
-    "totalResults": 1,
-    "crs":{"type":"name","properties":{"name":"Equatorial"}},
-    "type": "FeatureCollection" 
- }
+   "features": [
+      {
+         "geometry": {
+            "coordinates": [
+               [
+                  [85.93599,-68.83499],
+                  [83.02315,-68.8411],
+                  [82.94728,-69.88261],
+                  [86.00521,-69.88369],
+                  [85.93599,-68.83499]
+               ]
+            ],
+            "type": "Polygon"
+         },
+         "properties": {
+            "identifier": "30doradus",
+            "object": "30 doradus",
+            "title": "30doradus",
+            "quicklook": "https://upload.wikimedia.org/wikipedia/commons/c/c3/NGC_4414_%28NASA-med%29.jpg",
+            "def": "The Tarantula Nebula (also known as 30 Doradus) is an H II region in the Large Magellanic Cloud (LMC), from the solar system's perspective forming its south-east corner. ",
+            "services": {
+               "datacube": {
+                  "appDataCube": true,
+                  "appSpectre": true,
+                  "appHistogramm": true,
+                  "appDescription": true,
+                  "apiRest": "http://localhost:8081/",
+                  "appFile": "HH_IR_int-2_1342228508_L2_red_145.52_OI3P0-3P1_ProjectedCube.fits"
+               }
+            }
+         },
+         "type": "Feature"
+      }
+   ],
+   "totalResults": 1,
+   "crs": {
+      "type": "name",
+      "properties": {
+         "name": "Equatorial"
+      }
+   },
+   "type": "FeatureCollection"
+}
