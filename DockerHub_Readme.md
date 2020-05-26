@@ -5,13 +5,13 @@ This image contains the MizarWidget app with the [Datacube](https://github.com/M
 With this docker inage you'll be able to tryout the DataCube plugin in the MizarWidget context. 
 If you only want to try Datacube we suggest you use the [datacube-and-server](https://hub.docker.com/r/idocias/datacube-and-server) docker image instead. 
 
-It also creates the default folders for .fits and .nc files and downloads the cube 1342228703_M17-2_SPIRE-FTS_15.0.3244_HR_SLW_gridding_cube.fits from [HERSCHEL](http://idoc-herschel.ias.u-psud.fr/sitools/client-user/Herschel/project-index.html).
+It also creates the default folders for .fits and .nc files and downloads the cube HH_IR_int-2_1342228508_L2_red_145.52_OI3P0-3P1_ProjectedCube.fits from [HERSCHEL](http://idoc-herschel.ias.u-psud.fr/sitools/client-user/Herschel/project-index.html).
 
 These folders can be replaced with a host one using the -v option to bind-mount one to /data as written in the following script that you can use to run a container.
 
 ## Running the docker container
 
-Download an run the script [run.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/run.sh) from the docker_mizarwidget_datacube_and_server repository. 
+Download and run the script [run.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/run.sh) from the docker_mizarwidget_datacube_and_server repository. 
 
 This script will create a local folder that can host your cubes to be viewed in the app and run a new container from this image.
 
@@ -27,10 +27,7 @@ After lauching http://localhost:8000/" and accessing MizarWidget
 
 ## Cleanup
 
-To discard your container run the following command : 
-```bash
-docker rm mizarwidget-datacube_and_server -f
-```
+To discard your container use the script [clean.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/clean.sh) .
 
 ## Issues 
 If you see any issues with the docker file please report them in the [docker_mizarwidget_datacube_and_server](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/issues) github repository
