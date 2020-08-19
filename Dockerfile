@@ -47,7 +47,7 @@ RUN pip install lxml
 
 # 12-16 Create the mizarwidget build environment
 WORKDIR /tmp
-RUN git clone https://github.com/mmebsout/MizarWidget.git
+RUN git clone --branch updateangular https://github.com/mmebsout/MizarWidget.git
 WORKDIR /tmp/MizarWidget 
 RUN git submodule init && git submodule update
 RUN npm install -g grunt-cli grunt
@@ -62,9 +62,15 @@ RUN npm install \
 WORKDIR /tmp/MizarWidget/
 RUN npm install -g json \
     &&  json -I -f package.json -e "this.scripts['build:prod']='r.js -o build/buildMizarWidget.js'"
-RUN npm install \
-    && npm run build:datacube \
-    && npm run build:dist
+RUN npm install
+RUN groupadd -r swuser -g 433  \
+    && useradd -u 431 -r -g swuser -d /tmp/ -s /sbin/nologin -c "Docker image user" swuser \
+    && chown -R swuser:swuser /tmp/
+USER swuser
+RUN npm run build:datacube 
+
+USER root
+RUN npm run build:dist
 
 # 22 copy dist directory to web server
 RUN rm /var/www/html/index.nginx-debian.html \
@@ -120,9 +126,9 @@ RUN git clone  --single-branch --branch removeloc https://github.com/mmebsout/Da
 
 # create /data/private and /data/public folders 
 RUN mkdir -p /data/private && mkdir /data/public \
-    && chmod +x /data/private && chmod +x /data/public \
+    && chmod +x /data/private && chmod +x /data/public 
     # download test cube
-    && wget -P  /data/private http://idoc-herschel.ias.u-psud.fr/sitools/datastorage/user/storageRelease//R7_spire_fts/HIPE_Fits/FTS_SPIRE/OT1_atielens/M17-2/1342228703_M17-2_SPIRE-FTS_15.0.3244_HR_SLW_gridding_cube.fits
+    #&& wget -P  /data/private http://idoc-herschel.ias.u-psud.fr/sitools/datastorage/user/storageRelease//R7_spire_fts/HIPE_Fits/FTS_SPIRE/OT1_atielens/M17-2/1342228703_M17-2_SPIRE-FTS_15.0.3244_HR_SLW_gridding_cube.fits
 
 EXPOSE 8081
 
