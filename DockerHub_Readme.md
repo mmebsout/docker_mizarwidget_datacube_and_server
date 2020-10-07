@@ -37,7 +37,9 @@ To change option edit the file mizarWidget.json and change the property  "defaul
 
 ## Cleanup
 
-To discard your container use the script [clean.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/clean.sh) .
+To discard your container use the script [clean.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/clean.sh).
+
+This will also ask if you want the volumes removed if they exist. 
 
 ## Issues 
 If you see any issues with the docker file please report them in the [docker_mizarwidget_datacube_and_server](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/issues) github repository
