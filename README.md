@@ -9,4 +9,5 @@ This projects holds the files necessary to create the docker image datacube avai
   ---
 
 - To launch a container run [run.sh](run.sh)
-- To delete the container (even if it's still running) run [clean.sh](clean.sh)
+- To launch a container with volumes run [run-with-volumes.sh](run-with-volumes.sh)
+- To delete the container (even if it's still running) run [clean.sh](clean.sh). This will also ask if you want the volumes removed if they exist. 
