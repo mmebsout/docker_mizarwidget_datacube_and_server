@@ -11,19 +11,29 @@ These folders can be replaced with a host one using the -v option to bind-mount 
 
 ## Running the docker container
 
-Download and run the script [run.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/run.sh) from the docker_mizarwidget_datacube_and_server repository. 
+You can run this image by using either 
+- [run.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/run.sh) - that will simply run the image as is.
+- or [run-with-volumes.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/run-with-volumes.sh) that will allow you to use different cubes and play with Mizar-Widget configuration files.
 
-This script will create a local folder that can host your cubes to be viewed in the app and run a new container from this image.
 
-## Using Datacube in Mizarwidget
+### Using Datacube in Mizarwidget
 After lauching http://localhost:8000/" and accessing MizarWidget
  - drag and drop this [json file](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/demo.json) into the MizarWidget interface.
  - click in the square that has been zoomed-on
  - then click in the datacube icon (square colored layers)
  - the datacube interface opens up
- - use the credential "admin/admin" 
  - use the datacube app to view the contents of the demo file
 
+
+### Cubes
+When using [run-with-volumes.sh](https://github.com/mmebsout/docker_mizarwidget_datacube_and_server/blob/master/run-with-volumes.sh) a directory is created at the location of the script launch called "datacube_workspace". 
+
+A sample file "datacube_workspace/public/1342228703_M17-2_SPIRE-FTS_15.0.3244_HR_SLW_gridding_cube.fits" but you can add new ones as you like as long as they are FITS or netCDF files they can be read by the DataCube plugin.
+
+### MizarWidget configuration files
+When using run-with-volumes.sh a directory is created at the location of the script launch called "conf".
+You will there find different settings for MizarWidget like "mars.ctx" or "earth.ctx". The default setting is "sky.ctx".
+To change option edit the file mizarWidget.json and change the property  "defaultCtx": "sky" at the end of the file with the one you want like for example "d
 
 ## Cleanup
 

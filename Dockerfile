@@ -28,31 +28,31 @@ LABEL \
             -v $WORKSPACE_PATH:/data \
             mizarwidget-datacube_and_server" \
         mizarwidget_version=${BUILD_VERSION}
-# 8
+
 USER root
 
 
 #----------------------------------------------------------------------------- MIZARWIDGET
 #-----------------------------------------------------------------------------------------
-# 9 
+#  
 ADD scripts/ /tmp/
 
-# 10 Install the dependencies
+#  Install the dependencies
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends apt-utils \
     && apt-get install -y --fix-missing git python-pip \
     && apt-get install -y --fix-missing	ca-certificates nginx
-# 11
+
 RUN pip install lxml	
 
-# 12-16 Create the mizarwidget build environment
+# Create the mizarwidget build environment
 WORKDIR /tmp
-RUN git clone --branch updateangular https://github.com/mmebsout/MizarWidget.git
+RUN git clone --branch nologinoption https://github.com/mmebsout/MizarWidget.git
 WORKDIR /tmp/MizarWidget 
 RUN git submodule init && git submodule update
 RUN npm install -g grunt-cli grunt
 
-# 17-21 Build
+# Build
 WORKDIR /tmp/MizarWidget/external/Mizar
 RUN npm install \
     && npm run build:prod \
@@ -86,9 +86,10 @@ RUN sed -ri '/<\/head>/i \  <link rel=\"stylesheet\" href=\"..\/templates\/datac
 
 # 24 Export configuration file
 RUN mkdir -p /opt/mizar/conf \
-    && mv /var/www/html/conf/* /opt/mizar/conf/ \
+    && chmod +x /opt/mizar/conf  \
+    && cp /var/www/html/conf/* /opt/mizar/conf/ \
     && rm -rf /var/www/html/conf \
-    && ln -s /opt/mizar/conf /var/www/html/
+    && ln -s /opt/mizar/conf /var/www/html/ 
 
 # 25 Set up the Nginx Mapserver configuration.
 RUN rm -rf /etc/nginx/conf.d/* \
@@ -99,8 +100,6 @@ RUN rm -rf /etc/nginx/conf.d/* \
 # 26 Expose the Http server on 80
 EXPOSE 80
 
-# 27 Mount conf files
-VOLUME ["/opt/mizar/conf"]
 
 
 # #----------------------------------------------------------------------------- DATACUBESERVER
@@ -127,8 +126,6 @@ RUN git clone  --single-branch --branch removeloc https://github.com/mmebsout/Da
 # create /data/private and /data/public folders 
 RUN mkdir -p /data/private && mkdir /data/public \
     && chmod +x /data/private && chmod +x /data/public 
-    # download test cube
-    #&& wget -P  /data/private http://idoc-herschel.ias.u-psud.fr/sitools/datastorage/user/storageRelease//R7_spire_fts/HIPE_Fits/FTS_SPIRE/OT1_atielens/M17-2/1342228703_M17-2_SPIRE-FTS_15.0.3244_HR_SLW_gridding_cube.fits
 
 EXPOSE 8081
 
@@ -145,5 +142,8 @@ RUN apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # ------- RUN APPs
-RUN chmod +x /script.sh
-ENTRYPOINT ["/script.sh"]
+
+ COPY ./scripts/script.sh /
+ RUN chmod +x /script.sh
+ ENTRYPOINT ["/script.sh"]
+# ENTRYPOINT ["nginx"]
